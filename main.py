@@ -19,6 +19,10 @@ if os.path.exists(model_path):
 else:
     print("❌ Model file not found!")
 
+@app.get("/")
+def read_root():
+    return {"message": "Voice Gender Recognition API is running."}
+
 @app.post("/predict")
 def predict(data: VoiceFeatures):
     if model is None:
@@ -29,12 +33,3 @@ def predict(data: VoiceFeatures):
         return {"gender": "male" if prediction == 1 else "female"}
     except Exception as e:
         return {"error": str(e)}
-    
-    from fastapi import FastAPI
-
-app = FastAPI()
-
-@app.get("/")
-def read_root():
-    return {"message": "Voice Gender Recognition API is running."}
-
