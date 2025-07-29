@@ -29,3 +29,12 @@ def predict(data: VoiceFeatures):
         return {"gender": "male" if prediction == 1 else "female"}
     except Exception as e:
         return {"error": str(e)}
+    
+    from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"message": "Voice Gender Recognition API is running."}
+
